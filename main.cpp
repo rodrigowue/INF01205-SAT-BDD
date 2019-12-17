@@ -7,6 +7,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <bits/stdc++.h>
 #define SIZE_POINTERS 50
 
 using namespace std;
@@ -76,9 +77,12 @@ int main(int argc, char** argv)
 		cout << atoi(line.c_str()) << " //ID:" << outputs_ID[i] << endl;
 	}
 
+
+	char clauses[A_header][255];
 	//AIG Section
 	for (int i = 0; i < A_header; ++i)
 	{
+		int abobrinha=0;
 		getline(myfile,line);
 		std::vector<std::string> v;
    		std::istringstream buf(line);
@@ -92,13 +96,25 @@ int main(int argc, char** argv)
     	{
     		number=(atoi(v[0].c_str()))/2;	
     		sprintf(qualquer,"%c",number+'A');
+    		clauses[i][abobrinha]=qualquer[0];
+    		abobrinha++;
     	}
     	else{
     		number=(atoi(v[0].c_str())-1)/2;
-    		sprintf(qualquer,"%c",number+'a');
-    		// strcpy(qualquer,itoa(number+32));	
+    		sprintf(qualquer,"%c",number+'A');
+    		clauses[i][abobrinha]='!';
+    		abobrinha++;
+    		clauses[i][abobrinha]=qualquer[0];
+    		abobrinha++;	
     	}
     	cout << qualquer << "=(";
+
+    	clauses[i][abobrinha]='=';
+    	abobrinha++;
+    	clauses[i][abobrinha]='(';
+    	abobrinha++;
+
+
     	for (int j = 1; j < (v.end() - v.begin()); ++j)
     	{
     		// cout << atoi(v[j].c_str()) << endl;
@@ -106,24 +122,38 @@ int main(int argc, char** argv)
     		{	
     		number=(atoi(v[j].c_str()))/2;	
     		sprintf(qualquer,"%c",number+'A');
+    		clauses[i][abobrinha]=qualquer[0];
+    		abobrinha++;
     		}
     		else{
     		number=(atoi(v[j].c_str())-1)/2;
-    		sprintf(qualquer,"%c",number+'a');
-    		// strcpy(qualquer,itoa(number+32));	
+    		sprintf(qualquer,"%c",number+'A');
+    		clauses[i][abobrinha]='!';
+    		abobrinha++;
+    		clauses[i][abobrinha]=qualquer[0];
+    		abobrinha++;
     		}
     		
     		if(j!=(v.end() - v.begin())-1){
-    		cout << qualquer << "+";	
+    		cout << qualquer << "+";
+    		clauses[i][abobrinha]='+';
+    		abobrinha++;
     		}
     		else{
     		cout << qualquer << "";		
     		}
     	}
     	cout << ")" << endl;
-    	
+    	clauses[i][abobrinha]=')';
 	}
-
+	cout << "==================================" << endl;
+	cout << "clauses:" << endl;
+	for (int i = 0; i < A_header; ++i)
+	{
+		cout << clauses[i] << endl;
+	}
+	
+	
         struct node *root = newNode(1);
         root->pointing[0]       = newNode(2);
         root->pointing[1]       = newNode(3);
