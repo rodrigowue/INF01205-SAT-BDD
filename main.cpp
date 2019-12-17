@@ -22,6 +22,7 @@ int main(int argc, char** argv)
 	if (0==(myfile.is_open())){
 		cout << "Cannot open file:" << argv[1] << endl;
 	}
+
 	getline(myfile,line);
 	std::vector<std::string> v;
         std::istringstream buf(line);
@@ -47,6 +48,7 @@ int main(int argc, char** argv)
 		cout << "ERROR: Invalid! M != I+L+A" << endl;
 		exit(-1);
 	}
+	
 	//Primary Inputs
 	for(int i=0; i<I_header; i++){
 		getline(myfile,line);
@@ -55,8 +57,9 @@ int main(int argc, char** argv)
     	for(std::string token; getline(buf, token, ','); )
         	v.push_back(token);
     	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
-    	std::cout << '\n';	
+    	std::cout << '\n';
 	}
+	
 	//Primary Ouputs
 	for (int i = 0; i < O_header; ++i)
 	{
@@ -68,6 +71,7 @@ int main(int argc, char** argv)
     	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
     	std::cout << '\n';
 	}
+
 	//AIG Section
 	for (int i = 0; i < A_header; ++i)
 	{
@@ -79,5 +83,4 @@ int main(int argc, char** argv)
     	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
     	std::cout << '\n';
 	}
-	// while(getline(myfile,line))
 }
