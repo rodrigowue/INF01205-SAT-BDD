@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sstream>
 #include <vector>
@@ -79,12 +80,40 @@ int main(int argc, char** argv)
 	for (int i = 0; i < A_header; ++i)
 	{
 		getline(myfile,line);
-		std::vector<std::string> v;
+		std::vector<std::int> v;
    		std::istringstream buf(line);
     	for(std::string token; getline(buf, token, ' '); )
         	v.push_back(token);
     	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
     	std::cout << '\n';
+    	char qualquer[255];
+    	int number=0;
+    	if ((v[0].c_str())%2==0)
+    	{
+    		number=((v[0].c_str()))/2;	
+    		sprintf(qualquer,"%c",number+'A');
+    	}
+    	else{
+    		number=(v[0].c_str()-1)/2;
+    		sprintf(qualquer,"%c",number+'a');
+    		// strcpy(qualquer,itoa(number+32));	
+    	}
+    	cout << "linha1" << endl;
+    	for (int j = 1; j < sizeof(v); ++j)
+    	{
+    		cout << "linha2" << endl;
+    		if ((v[j].c_str())%2==0)
+    		{	
+    		cout << "linha3" << endl;
+    		number=((v[j].c_str()))/2;	
+    		sprintf(qualquer,"%c",number+'A');
+    		}
+    		else{
+    		number=(atoi(v[j].c_str())-1)/2;
+    		sprintf(qualquer,"%c",number+'a');
+    		// strcpy(qualquer,itoa(number+32));	
+    		}
+    	}
     	
 	}
 
