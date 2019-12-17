@@ -49,27 +49,22 @@ int main(int argc, char** argv)
 		exit(-1);
 	}
 	
+
+	int inputs[I_header], outputs[O_header];
+
 	//Primary Inputs
 	for(int i=0; i<I_header; i++){
 		getline(myfile,line);
-		std::vector<std::string> v;
-   		std::istringstream buf(line);
-    	for(std::string token; getline(buf, token, ','); )
-        	v.push_back(token);
-    	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
-    	std::cout << '\n';
+		inputs[i] = atoi(line.c_str());
+		cout << inputs[i] << endl;
 	}
 	
 	//Primary Ouputs
 	for (int i = 0; i < O_header; ++i)
 	{
 		getline(myfile,line);
-		std::vector<std::string> v;
-   		std::istringstream buf(line);
-    	for(std::string token; getline(buf, token, ','); )
-        	v.push_back(token);
-    	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
-    	std::cout << '\n';
+		outputs[i] = atoi(line.c_str());
+		cout << outputs[i] << endl;
 	}
 
 	//AIG Section
@@ -78,9 +73,10 @@ int main(int argc, char** argv)
 		getline(myfile,line);
 		std::vector<std::string> v;
    		std::istringstream buf(line);
-    	for(std::string token; getline(buf, token, ','); )
+    	for(std::string token; getline(buf, token, ' '); )
         	v.push_back(token);
     	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
     	std::cout << '\n';
+    	
 	}
 }
