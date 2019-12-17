@@ -13,12 +13,7 @@
 using namespace std;
 extern FILE *yyin;
 
-struct node {
-    int id;
-    struct node *pointing[SIZE_POINTERS];
-};
-struct node* newNode(int data);
-void printNode(struct node *root);
+string create_clause_final(string clauses, char dic[3][255], int dic_size);
 
 int main(int argc, char** argv)
 	{
@@ -78,7 +73,7 @@ int main(int argc, char** argv)
 	}
 
 
-	char clauses[A_header][255];
+	char clauses [A_header][255];
 	//AIG Section
 	for (int i = 0; i < A_header; ++i)
 	{
@@ -145,6 +140,8 @@ int main(int argc, char** argv)
     	}
     	cout << ")" << endl;
     	clauses[i][abobrinha]=')';
+    	abobrinha++;
+    	clauses[i][abobrinha]='#';
 	}
 	cout << "==================================" << endl;
 	cout << "clauses:" << endl;
@@ -152,34 +149,45 @@ int main(int argc, char** argv)
 	{
 		cout << clauses[i] << endl;
 	}
-	
-	
-        struct node *root = newNode(1);
-        root->pointing[0]       = newNode(2);
-        root->pointing[1]       = newNode(3);
-        root->pointing[2]       = newNode(4);
-        root->pointing[3]       = newNode(5);
 
-        root->pointing[0]->pointing[0] = newNode(5);
+	string last_clause = string(clauses[A_header-1]);
+	string final = create_clause_final(last_clause, clauses, A_header);
+	cout << final << endl;
 
-        printNode(root->pointing[0]);
+
+
 }
 
-struct node* newNode(int data){
-    struct node* node = (struct node*)malloc(sizeof(struct node));
-    node->id = data;
-    for(int i = 0; i < SIZE_POINTERS; i++){
-        node->pointing[i] = NULL;
-    }
-    return(node);
-}
+string create_clause_final(string clauses, char dic[3][255], int dic_size){
+	string str;//<< clauses.at(0) << clauses.at(1);
+	for(int i=2;clauses[i]!='#'; i++){
+		if(clauses.at(i) >= 'A' && clauses.at(i) <= 'Z'){
+			cout << "achei: " << clauses.at(i) << endl;
+				//search_tokens
+				int index=0;
+				int found=0;
+				int found_index=0;
+				while(index<dic_size)
+				{
+					if (clauses.at(i) == dic[index][0])
+					{
+						found_index=index;
+						found=1;
+					}
+					index++;
+				}
 
-void printNode(struct node *root) {
-    printf("%d --> ", root->id);
-    for(int i = 0; i < SIZE_POINTERS; i++){
-        if(root->pointing[i] != (void *) NULL){
-            printf("%d ", root->pointing[i]->id);
-        }
-    }
-    printf("\n");
+				if(found==1){
+					cout << dic[found_index] << endl;
+					string new_clause = create_clause_final(string(dic[found_index]), dic, dic_size-2);
+					cout << "new clause inserted: " << new_clause <<  endl;
+					str += new_clause;
+				} else {
+					str += clauses.at(i);
+				}
+		} else {
+			str += clauses.at(i);
+		}
+	}
+	return str;
 }
