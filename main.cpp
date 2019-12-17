@@ -47,16 +47,37 @@ int main(int argc, char** argv)
 		cout << "ERROR: Invalid! M != I+L+A" << endl;
 		exit(-1);
 	}
+	//Primary Inputs
 	for(int i=0; i<I_header; i++){
-		cout << "test" << endl;
+		getline(myfile,line);
+		std::vector<std::string> v;
+   		std::istringstream buf(line);
+    	for(std::string token; getline(buf, token, ','); )
+        	v.push_back(token);
+    	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
+    	std::cout << '\n';	
 	}
-	while(getline(myfile,line))
+	//Primary Ouputs
+	for (int i = 0; i < O_header; ++i)
 	{
-	std::vector<std::string> v;
-   	std::istringstream buf(line);
+		getline(myfile,line);
+		std::vector<std::string> v;
+   		std::istringstream buf(line);
     	for(std::string token; getline(buf, token, ','); )
         	v.push_back(token);
     	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
     	std::cout << '\n';
 	}
+	//AIG Section
+	for (int i = 0; i < A_header; ++i)
+	{
+		getline(myfile,line);
+		std::vector<std::string> v;
+   		std::istringstream buf(line);
+    	for(std::string token; getline(buf, token, ','); )
+        	v.push_back(token);
+    	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
+    	std::cout << '\n';
+	}
+	// while(getline(myfile,line))
 }
