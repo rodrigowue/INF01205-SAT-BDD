@@ -5,7 +5,6 @@
 #include <sstream>
 #include <vector>
 #include <iterator>
-#include <iostream>
 #include <algorithm>
 
 using namespace std;
@@ -31,6 +30,11 @@ int main(int argc, char** argv)
         copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
         std::cout << '\n';
 	//check if header information (MILOA) is alright
+    int M_header = atoi(v[1].c_str());
+    int I_header = atoi(v[2].c_str());
+    int L_header = atoi(v[3].c_str());
+    int O_header = atoi(v[4].c_str());
+    int A_header = atoi(v[5].c_str());
 	cout << "Header Info: "               << endl;
 	cout << "M (maximum variable index):" << v[1] << endl;
 	cout << "I (number of inputs):"       << v[2] << endl;
@@ -39,12 +43,13 @@ int main(int argc, char** argv)
 	cout << "A (number of AND gates):"    << v[5] << endl;
 	cout << "----------------------------" << endl;
 	cout << "Verifying if M=I+L+A" << endl;
-	if (int(v[1])!=int(v[2])+int(v[3])+int(v[5])){
+	if (M_header!=I_header+L_header+A_header){
 		cout << "ERROR: Invalid! M != I+L+A" << endl;
 		exit(-1);
 	}
-
-
+	for(int i=0; i<I_header; i++){
+		cout << "test" << endl;
+	}
 	while(getline(myfile,line))
 	{
 	std::vector<std::string> v;
