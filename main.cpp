@@ -6,9 +6,17 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#define SIZE_POINTERS 50
 
 using namespace std;
 extern FILE *yyin;
+
+struct node {
+    int id;
+    struct node *pointing[SIZE_POINTERS];
+};
+struct node* newNode(int data);
+void printNode(struct node *root);
 
 int main(int argc, char** argv)
 	{
@@ -79,4 +87,33 @@ int main(int argc, char** argv)
     	std::cout << '\n';
     	
 	}
+
+        struct node *root = newNode(1);
+        root->pointing[0]       = newNode(2);
+        root->pointing[1]       = newNode(3);
+        root->pointing[2]       = newNode(4);
+        root->pointing[3]       = newNode(5);
+
+        root->pointing[0]->pointing[0] = newNode(5);
+
+        printNode(root->pointing[0]);
+}
+
+struct node* newNode(int data){
+    struct node* node = (struct node*)malloc(sizeof(struct node));
+    node->id = data;
+    for(int i = 0; i < SIZE_POINTERS; i++){
+        node->pointing[i] = NULL;
+    }
+    return(node);
+}
+
+void printNode(struct node *root) {
+    printf("%d --> ", root->id);
+    for(int i = 0; i < SIZE_POINTERS; i++){
+        if(root->pointing[i] != (void *) NULL){
+            printf("%d ", root->pointing[i]->id);
+        }
+    }
+    printf("\n");
 }
