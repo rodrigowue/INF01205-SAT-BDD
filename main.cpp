@@ -50,21 +50,21 @@ int main(int argc, char** argv)
 	}
 	
 
-	int inputs[I_header], outputs[O_header];
+	int inputs_ID[I_header], outputs_ID[O_header];
 
 	//Primary Inputs
 	for(int i=0; i<I_header; i++){
 		getline(myfile,line);
-		inputs[i] = atoi(line.c_str());
-		cout << inputs[i] << endl;
+		inputs_ID[i] = (atoi(line.c_str()))/2;
+		cout << atoi(line.c_str()) << " //ID:" << inputs_ID[i] << endl;
 	}
 	
 	//Primary Ouputs
 	for (int i = 0; i < O_header; ++i)
 	{
 		getline(myfile,line);
-		outputs[i] = atoi(line.c_str());
-		cout << outputs[i] << endl;
+		outputs_ID[i] = (atoi(line.c_str()))/2;
+		cout << atoi(line.c_str()) << " //ID:" << outputs_ID[i] << endl;
 	}
 
 	//AIG Section
