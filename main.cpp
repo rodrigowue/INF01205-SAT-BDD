@@ -73,7 +73,8 @@ int main(int argc, char** argv)
 	}
 
 
-	char clauses [A_header][255];
+	char clauses [A_header][255]= {};
+	
 	//AIG Section
 	for (int i = 0; i < A_header; ++i)
 	{
@@ -140,8 +141,6 @@ int main(int argc, char** argv)
     	}
     	cout << ")" << endl;
     	clauses[i][abobrinha]=')';
-    	abobrinha++;
-    	clauses[i][abobrinha]='#';
 	}
 	cout << "==================================" << endl;
 	cout << "clauses:" << endl;
@@ -149,9 +148,12 @@ int main(int argc, char** argv)
 	{
 		cout << clauses[i] << endl;
 	}
-
+	cout << "-----------------------------------" << endl;
 	string last_clause = string(clauses[A_header-1]);
 	string final = create_clause_final(last_clause, clauses, A_header);
+
+	cout << "==================================" << endl;
+	cout << "Final Clause:" << endl;
 	cout << final << endl;
 
 
@@ -160,7 +162,7 @@ int main(int argc, char** argv)
 
 string create_clause_final(string clauses, char dic[3][255], int dic_size){
 	string str;//<< clauses.at(0) << clauses.at(1);
-	for(int i=2;clauses[i]!='#'; i++){
+	for(int i=2;i<clauses.length(); i++){
 		if(clauses.at(i) >= 'A' && clauses.at(i) <= 'Z'){
 			cout << "achei: " << clauses.at(i) << endl;
 				//search_tokens
