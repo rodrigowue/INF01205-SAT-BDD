@@ -24,17 +24,27 @@ int main(int argc, char *argv[])
     cout << "================================================================" << endl;
     cout << clause1 << endl;
     cout << clause2 << endl;
-    string merged_clause;
+    string merged_clause, merged_clause2;
     cout << "================================================================" << endl;
-    merged_clause="(!" + clause1 + "*!" + clause2 + "*!z)+(" + clause1 + "*" + clause2 + "*!z)+(" + clause1 + "*!" + clause2 + "*!z)+(!" + clause1 + "*" + clause2 + "*z)";
+
+
+    merged_clause ="(!" + clause1 + "*!" + clause2 + "*!z)+(" + clause1 + "*" + clause2 + "*!z)+(" + clause1 + "*!" + clause2 + "*!z)+(!" + clause1 + "*" + clause2 + "*z)";
+    merged_clause2="((!" + clause1 + "*!" + clause2 + "*!z)+(" + clause1 + "*" + clause2 + "*!z)+(" + clause1 + "*!" + clause2 + "*!z)+(!" + clause1 + "*" + clause2 + "*z))*(z)";
     cout << merged_clause << endl;
+
     nodobdd *nd1=g.create_from_equation(merged_clause, conjunto_variaveis);
     nodobdd *c=g.create_from_equation("z", conjunto_variaveis);
     nodobdd *nd2=g.cofactor(nd1, c, '+');
     //retrieves a constant zero
     nodobdd *nd4=g.getConstantZero();
+    nodobdd *nd5=g.create_from_equation(merged_clause2, conjunto_variaveis);
+    cout << "0=" << nd4 << endl << "Deve ser 0:" << nd5 << endl << "co-fator:" << nd2 << endl;
+    cout << "----------------------------------------------------------------" << endl;
     if(nd2==nd4){
-      cout << "equal" << endl;
+      cout << "Circuits are equivalent! :)" << endl;
+    }
+    else{
+      cout << "Circuits are different! :(" << endl;
     }
     // printf("%d",*nd2->getConstantZero()); 
     return EXIT_SUCCESS;
