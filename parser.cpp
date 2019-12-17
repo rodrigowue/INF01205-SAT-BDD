@@ -13,9 +13,9 @@
 using namespace std;
 extern FILE *yyin;
 
-string create_clause_final(string clauses, char dic[3][255], int dic_size);
+string create_clause_final(string clauses, char dic[255][255], int dic_size, int start_token);
 
-string aiger_reader(ifstream & myfile)
+string aiger_reader(ifstream & myfile,int start_token)
 	{
 	string line;
 	char delim[]=" ";
@@ -84,13 +84,13 @@ string aiger_reader(ifstream & myfile)
     	if (atoi(v[0].c_str())%2==0)
     	{
     		number=(atoi(v[0].c_str()))/2;	
-    		sprintf(qualquer,"%c",number+'A');
+    		sprintf(qualquer,"%c",number+start_token);
     		clauses[i][abobrinha]=qualquer[0];
     		abobrinha++;
     	}
     	else{
     		number=(atoi(v[0].c_str())-1)/2;
-    		sprintf(qualquer,"%c",number+'A');
+    		sprintf(qualquer,"%c",number+start_token);
     		clauses[i][abobrinha]='!';
     		abobrinha++;
     		clauses[i][abobrinha]=qualquer[0];
@@ -110,13 +110,13 @@ string aiger_reader(ifstream & myfile)
     		if (atoi(v[j].c_str())%2==0)
     		{	
     		number=(atoi(v[j].c_str()))/2;	
-    		sprintf(qualquer,"%c",number+'A');
+    		sprintf(qualquer,"%c",number+start_token);
     		clauses[i][abobrinha]=qualquer[0];
     		abobrinha++;
     		}
     		else{
     		number=(atoi(v[j].c_str())-1)/2;
-    		sprintf(qualquer,"%c",number+'A');
+    		sprintf(qualquer,"%c",number+start_token);
     		clauses[i][abobrinha]='!';
     		abobrinha++;
     		clauses[i][abobrinha]=qualquer[0];
@@ -143,7 +143,7 @@ string aiger_reader(ifstream & myfile)
 	}
 	cout << "-----------------------------------" << endl;
 	string last_clause = string(clauses[A_header-1]);
-	string final = create_clause_final(last_clause, clauses, A_header);
+	string final = create_clause_final(last_clause, clauses, A_header,start_token);
 
 	cout << "==================================" << endl;
 	cout << "Final Clause:" << endl;
@@ -153,10 +153,10 @@ string aiger_reader(ifstream & myfile)
 
 }
 
-string create_clause_final(string clauses, char dic[3][255], int dic_size){
+string create_clause_final(string clauses, char dic[3][255], int dic_size, int start_token){
 	string str;//<< clauses.at(0) << clauses.at(1);
 	for(int i=2;i<clauses.length(); i++){
-		if(clauses.at(i) >= 'A' && clauses.at(i) <= 'Z'){
+		if(clauses.at(i) >= start_token && clauses.at(i) <= start_token+25){
 			cout << "achei: " << clauses.at(i) << endl;
 				//search_tokens
 				int index=0;
@@ -174,7 +174,7 @@ string create_clause_final(string clauses, char dic[3][255], int dic_size){
 
 				if(found==1){
 					cout << dic[found_index] << endl;
-					string new_clause = create_clause_final(string(dic[found_index]), dic, dic_size-2);
+					string new_clause = create_clause_final(string(dic[found_index]), dic, dic_size-2,start_token);
 					cout << "new clause inserted: " << new_clause <<  endl;
 					str += new_clause;
 				} else {

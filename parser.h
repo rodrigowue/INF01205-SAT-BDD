@@ -13,6 +13,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string aiger_reader(ifstream & myfile);
+string aiger_reader(ifstream & myfile, int start_token);
 
 #endif
