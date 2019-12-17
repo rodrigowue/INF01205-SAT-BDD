@@ -80,7 +80,7 @@ int main(int argc, char** argv)
 	for (int i = 0; i < A_header; ++i)
 	{
 		getline(myfile,line);
-		std::vector<std::int> v;
+		std::vector<std::string> v;
    		std::istringstream buf(line);
     	for(std::string token; getline(buf, token, ' '); )
         	v.push_back(token);
@@ -88,24 +88,23 @@ int main(int argc, char** argv)
     	std::cout << '\n';
     	char qualquer[255];
     	int number=0;
-    	if ((v[0].c_str())%2==0)
+    	if (atoi(v[0].c_str())%2==0)
     	{
-    		number=((v[0].c_str()))/2;	
+    		number=(atoi(v[0].c_str()))/2;	
     		sprintf(qualquer,"%c",number+'A');
     	}
     	else{
-    		number=(v[0].c_str()-1)/2;
+    		number=(atoi(v[0].c_str())-1)/2;
     		sprintf(qualquer,"%c",number+'a');
     		// strcpy(qualquer,itoa(number+32));	
     	}
-    	cout << "linha1" << endl;
-    	for (int j = 1; j < sizeof(v); ++j)
+    	cout << qualquer << "=(";
+    	for (int j = 1; j < (v.end() - v.begin()); ++j)
     	{
-    		cout << "linha2" << endl;
-    		if ((v[j].c_str())%2==0)
+    		// cout << atoi(v[j].c_str()) << endl;
+    		if (atoi(v[j].c_str())%2==0)
     		{	
-    		cout << "linha3" << endl;
-    		number=((v[j].c_str()))/2;	
+    		number=(atoi(v[j].c_str()))/2;	
     		sprintf(qualquer,"%c",number+'A');
     		}
     		else{
@@ -113,7 +112,15 @@ int main(int argc, char** argv)
     		sprintf(qualquer,"%c",number+'a');
     		// strcpy(qualquer,itoa(number+32));	
     		}
+    		
+    		if(j!=(v.end() - v.begin())-1){
+    		cout << qualquer << "+";	
+    		}
+    		else{
+    		cout << qualquer << "";		
+    		}
     	}
+    	cout << ")" << endl;
     	
 	}
 
