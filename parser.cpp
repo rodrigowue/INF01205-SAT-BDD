@@ -7,7 +7,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
-//#include <bits/stdc++.h>
+#include <bits/stdc++.h>
 #define SIZE_POINTERS 50
 
 using namespace std;

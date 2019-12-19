@@ -18,8 +18,8 @@ int main(int argc, char *argv[])
     }
 
 
-    ifstream first_file((string) argv[1]);
-    ifstream second_file((string) argv[2]);
+    ifstream first_file(argv[1]);
+    ifstream second_file(argv[2]);
 
     if (0==(first_file.is_open())){
         cout << "Cannot open file:" << argv[1] << endl;
