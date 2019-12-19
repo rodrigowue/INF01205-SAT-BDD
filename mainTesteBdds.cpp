@@ -88,7 +88,7 @@ cout << "     ░                                                 " << endl;
     //retrieves a constant zero
     nodobdd *nd4=g.getConstantZero();
     nodobdd *nd5=g.create_from_equation(merged_clause2, conjunto_variaveis);
-    cout << "0=" << nd4 << endl << "Deve ser 0:" << nd5 << endl << "co-fator:" << nd2 << endl;
+    cout << "Constant zero address:" << nd4 << endl << "Added *(z) adress:" << nd5 << endl << "Co-factor Address:" << nd2 << endl;
     cout << "\033[0m----------------------------------------------------------------" << endl;
     if(nd2==nd4){
       cout << "Circuits are:" << endl;
