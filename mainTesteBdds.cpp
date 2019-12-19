@@ -8,19 +8,39 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+
+    if (argc < 3 ){
+        cout << "Insufficient agrtuments: ./bdd arg1.aag arg2.aag" << endl;
+        return 0;
+    }
+
+
+    ifstream first_file((string) argv[1]);
+    ifstream second_file((string) argv[2]);
+
+    if (0==(first_file.is_open())){
+        cout << "Cannot open file:" << argv[1] << endl;
+        return 0;
+    }
+
+    if (0==(second_file.is_open())){
+        cout << "Cannot open file:" << argv[2] << endl;
+        return 0;
+    }
+
     gerentebdd g;    
     set<string> conjunto_variaveis;
     string clause1,clause2;
     cout << "================================================================" << endl;
-    cout << "First File:" << endl;
+    cout << "First File: " << (string) argv[1] << endl;
     //Fetches main clause from the first file
-    ifstream first_file("xor_um.aag");
     clause1 = aiger_reader(first_file,65);
+    cout << "CLAUSE 1:" << clause1 << endl;
     cout << "================================================================" << endl;
-    cout << "Second File:" << endl;
+    cout << "Second File: " << (string) argv[1] << endl;
     //Fetches main clause from the second file
-    ifstream second_file("xor_dois.aag");
     clause2 = aiger_reader(second_file,65);
+    cout << "CLAUSE 2:" << clause2 << endl;
     cout << "================================================================" << endl;
     cout << clause1 << endl;
     cout << clause2 << endl;

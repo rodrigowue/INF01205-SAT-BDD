@@ -7,7 +7,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 #define SIZE_POINTERS 50
 
 using namespace std;
@@ -66,7 +66,7 @@ string aiger_reader(ifstream & myfile,int start_token)
 	}
 
 
-	char clauses [A_header][255]= {};
+	char clauses [255][255]= {};
 	
 	//AIG Section
 	for (int i = 0; i < A_header; ++i)
@@ -153,7 +153,7 @@ string aiger_reader(ifstream & myfile,int start_token)
 
 }
 
-string create_clause_final(string clauses, char dic[3][255], int dic_size, int start_token){
+string create_clause_final(string clauses, char dic[255][255], int dic_size, int start_token){
 	string str;//<< clauses.at(0) << clauses.at(1);
 	for(int i=2;i<clauses.length(); i++){
 		if(clauses.at(i) >= start_token && clauses.at(i) <= start_token+25){

@@ -7,13 +7,13 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 #define SIZE_POINTERS 50
 
 using namespace std;
 extern FILE *yyin;
 
-string create_clause_final(string clauses, char dic[3][255], int dic_size);
+string create_clause_final(string clauses, char dic[255][255], int dic_size);
 
 int main(int argc, char** argv)
 	{
@@ -160,7 +160,7 @@ int main(int argc, char** argv)
 
 }
 
-string create_clause_final(string clauses, char dic[3][255], int dic_size){
+string create_clause_final(string clauses, char dic[255][255], int dic_size){
 	string str;//<< clauses.at(0) << clauses.at(1);
 	for(int i=2;i<clauses.length(); i++){
 		if(clauses.at(i) >= 'A' && clauses.at(i) <= 'Z'){

@@ -10,7 +10,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 using namespace std;
 
 string aiger_reader(ifstream & myfile, int start_token);
