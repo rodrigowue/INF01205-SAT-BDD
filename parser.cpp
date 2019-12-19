@@ -27,20 +27,20 @@ string aiger_reader(ifstream & myfile,int start_token)
         for(std::string token; getline(buf, token, ' '); )
                  v.push_back(token);
         // copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
-        std::cout << '\n';
+        // std::cout << '\n';
 	//check if header information (MILOA) is alright
     int M_header = atoi(v[1].c_str());
     int I_header = atoi(v[2].c_str());
     int L_header = atoi(v[3].c_str());
     int O_header = atoi(v[4].c_str());
     int A_header = atoi(v[5].c_str());
-	cout << "Header Info: "               << endl;
-	cout << "M (maximum variable index):" << v[1] << endl;
-	cout << "I (number of inputs):"       << v[2] << endl;
-	cout << "L (number of latches):"      << v[3] << endl;
-	cout << "O (number of outputs):"      << v[4] << endl;
-	cout << "A (number of AND gates):"    << v[5] << endl;
-	cout << "----------------------------" << endl;
+	// cout << "Header Info: "               << endl;
+	// cout << "M (maximum variable index):" << v[1] << endl;
+	// cout << "I (number of inputs):"       << v[2] << endl;
+	// cout << "L (number of latches):"      << v[3] << endl;
+	// cout << "O (number of outputs):"      << v[4] << endl;
+	// cout << "A (number of AND gates):"    << v[5] << endl;
+	// cout << "----------------------------" << endl;
 	// cout << "Verifying if M=I+L+A" << endl;
 	if (M_header!=I_header+L_header+A_header){
 		cout << "ERROR: Invalid! M != I+L+A" << endl;
