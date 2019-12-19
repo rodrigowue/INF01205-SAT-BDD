@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     clause1 = aiger_reader(first_file,65);
     cout << "CLAUSE 1:" << clause1 << endl;
     cout << "================================================================" << endl;
-    cout << "Second File: " << (string) argv[1] << endl;
+    cout << "Second File: " << (string) argv[2] << endl;
     //Fetches main clause from the second file
     clause2 = aiger_reader(second_file,65);
     cout << "CLAUSE 2:" << clause2 << endl;
