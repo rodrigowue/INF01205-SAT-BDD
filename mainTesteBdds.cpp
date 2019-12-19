@@ -9,6 +9,9 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
+    cout << "================================================================" << endl;
+    cout << "Equivalence Checker using BDDs \n" << endl;
+    cout << "by: Rodolfo Viola, Rodrigo Franzoi, and Rodrigo Wuerdig" << endl;
     if (argc < 3 ){
         cout << "Insufficient agrtuments: ./bdd arg1.aag arg2.aag" << endl;
         return 0;
@@ -41,15 +44,16 @@ int main(int argc, char *argv[])
     //Fetches main clause from the second file
     clause2 = aiger_reader(second_file,65);
     cout << "CLAUSE 2:" << clause2 << endl;
-    cout << "================================================================" << endl;
-    cout << clause1 << endl;
-    cout << clause2 << endl;
+    // cout << "================================================================" << endl;
+    // cout << clause1 << endl;
+    // cout << clause2 << endl;
     string merged_clause, merged_clause2;
     cout << "================================================================" << endl;
 
 
     merged_clause ="(!" + clause1 + "*!" + clause2 + "*!z)+(" + clause1 + "*" + clause2 + "*!z)+(" + clause1 + "*!" + clause2 + "*!z)+(!" + clause1 + "*" + clause2 + "*z)";
     merged_clause2="((!" + clause1 + "*!" + clause2 + "*!z)+(" + clause1 + "*" + clause2 + "*!z)+(" + clause1 + "*!" + clause2 + "*!z)+(!" + clause1 + "*" + clause2 + "*z))*(z)";
+    cout << "Merged Clause:" << endl;
     cout << merged_clause << endl;
 
     nodobdd *nd1=g.create_from_equation(merged_clause, conjunto_variaveis);

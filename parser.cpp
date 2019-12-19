@@ -26,7 +26,7 @@ string aiger_reader(ifstream & myfile,int start_token)
         std::istringstream buf(line);
         for(std::string token; getline(buf, token, ' '); )
                  v.push_back(token);
-        copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
+        // copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
         std::cout << '\n';
 	//check if header information (MILOA) is alright
     int M_header = atoi(v[1].c_str());
@@ -41,12 +41,12 @@ string aiger_reader(ifstream & myfile,int start_token)
 	cout << "O (number of outputs):"      << v[4] << endl;
 	cout << "A (number of AND gates):"    << v[5] << endl;
 	cout << "----------------------------" << endl;
-	cout << "Verifying if M=I+L+A" << endl;
+	// cout << "Verifying if M=I+L+A" << endl;
 	if (M_header!=I_header+L_header+A_header){
 		cout << "ERROR: Invalid! M != I+L+A" << endl;
 		exit(-1);
 	}
-	
+	// cout << "OK!" << endl;
 
 	int inputs_ID[I_header], outputs_ID[O_header];
 
@@ -54,7 +54,7 @@ string aiger_reader(ifstream & myfile,int start_token)
 	for(int i=0; i<I_header; i++){
 		getline(myfile,line);
 		inputs_ID[i] = (atoi(line.c_str()))/2;
-		cout << atoi(line.c_str()) << " //ID:" << inputs_ID[i] << endl;
+		// cout << atoi(line.c_str()) << " //ID:" << inputs_ID[i] << endl;
 	}
 	
 	//Primary Ouputs
@@ -62,7 +62,7 @@ string aiger_reader(ifstream & myfile,int start_token)
 	{
 		getline(myfile,line);
 		outputs_ID[i] = (atoi(line.c_str()))/2;
-		cout << atoi(line.c_str()) << " //ID:" << outputs_ID[i] << endl;
+		// cout << atoi(line.c_str()) << " //ID:" << outputs_ID[i] << endl;
 	}
 
 
@@ -77,8 +77,8 @@ string aiger_reader(ifstream & myfile,int start_token)
    		std::istringstream buf(line);
     	for(std::string token; getline(buf, token, ' '); )
         	v.push_back(token);
-    	copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
-    	std::cout << '\n';
+    	// copy(v.begin(), v.end(), std::ostream_iterator<std::string>(std::cout, "_token "));
+    	// std::cout << '\n';
     	char qualquer[255];
     	int number=0;
     	if (atoi(v[0].c_str())%2==0)
@@ -96,7 +96,7 @@ string aiger_reader(ifstream & myfile,int start_token)
     		clauses[i][abobrinha]=qualquer[0];
     		abobrinha++;	
     	}
-    	cout << qualquer << "=(";
+    	// cout << qualquer << "=(";
 
     	clauses[i][abobrinha]='=';
     	abobrinha++;
@@ -124,30 +124,30 @@ string aiger_reader(ifstream & myfile,int start_token)
     		}
     		
     		if(j!=(v.end() - v.begin())-1){
-    		cout << qualquer << "+";
+    		// cout << qualquer << "+";
     		clauses[i][abobrinha]='+';
     		abobrinha++;
     		}
     		else{
-    		cout << qualquer << "";		
+    		// cout << qualquer << "";		
     		}
     	}
-    	cout << ")" << endl;
+    	// cout << ")" << endl;
     	clauses[i][abobrinha]=')';
 	}
-	cout << "==================================" << endl;
-	cout << "clauses:" << endl;
-	for (int i = 0; i < A_header; ++i)
-	{
-		cout << clauses[i] << endl;
-	}
-	cout << "-----------------------------------" << endl;
+	// cout << "==================================" << endl;
+	// cout << "clauses:" << endl;
+	// for (int i = 0; i < A_header; ++i)
+	// {
+	// 	cout << clauses[i] << endl;
+	// }
+	// cout << "-----------------------------------" << endl;
 	string last_clause = string(clauses[A_header-1]);
 	string final = create_clause_final(last_clause, clauses, A_header,start_token);
 
-	cout << "==================================" << endl;
-	cout << "Final Clause:" << endl;
-	cout << final << endl;
+	// cout << "==================================" << endl;
+	// cout << "Final Clause:" << endl;
+	// cout << final << endl;
 
 	return final;
 
@@ -157,7 +157,7 @@ string create_clause_final(string clauses, char dic[255][255], int dic_size, int
 	string str;//<< clauses.at(0) << clauses.at(1);
 	for(int i=2;i<clauses.length(); i++){
 		if(clauses.at(i) >= start_token && clauses.at(i) <= start_token+25){
-			cout << "achei: " << clauses.at(i) << endl;
+			// cout << "achei: " << clauses.at(i) << endl;
 				//search_tokens
 				int index=0;
 				int found=0;
@@ -173,9 +173,9 @@ string create_clause_final(string clauses, char dic[255][255], int dic_size, int
 				}
 
 				if(found==1){
-					cout << dic[found_index] << endl;
+					// cout << dic[found_index] << endl;
 					string new_clause = create_clause_final(string(dic[found_index]), dic, dic_size-2,start_token);
-					cout << "new clause inserted: " << new_clause <<  endl;
+					// cout << "new clause inserted: " << new_clause <<  endl;
 					str += new_clause;
 				} else {
 					str += clauses.at(i);
